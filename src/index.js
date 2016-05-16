@@ -24,7 +24,6 @@ class PerfSwitch extends React.Component {
       console.log('React.addons.perf.start...');
     } else {
       perf.stop();
-      console.log(printInclusive)
       if (printInclusive) {
         console.log('React.addons.perf.printInclusive');
         perf.printInclusive();
@@ -65,5 +64,19 @@ div.style.bottom = '5px';
 div.style.opacity = '0.5';
 document.body.appendChild(div);
 
-ReactDOM.render(<PerfSwitch printInclusive />, div);
+const scripts = document.querySelectorAll('script');
+const src = scripts[scripts.length - 1].src;
+
+let arg = src.indexOf('?') !== -1 ? src.split('?').pop() : '';
+let settings = {};
+arg.replace(/(\w+)(?:=([^&]*))?/g, function(a, key, value) {
+  settings[key] = value;
+});
+
+ReactDOM.render(
+  <PerfSwitch printInclusive
+    printWasted={settings.printWasted === '1'}
+    printOperations={settings.printOperations === '1'}
+  />,
+  div);
 })();
