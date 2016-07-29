@@ -1,7 +1,7 @@
 {
   "name": "react-perf-switch",
   "author": "lobos841@gmail.com",
-  "version": "0.2.3",
+  "version": "0.2.8",
   "description": "React addons perf switch",
   "main": "./index.js",
   "scripts": {},
